@@ -1,15 +1,18 @@
 package com.spring.study.backend.service;
 
 import io.jsonwebtoken.*;
+import lombok.Getter;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 @Service("jwtService")
 public class JwtServiceImpl implements JwtService{
 
@@ -39,6 +42,16 @@ public class JwtServiceImpl implements JwtService{
     }
 
     @Override
+    public String getPassword(String key, String password) {
+        Base64.Decoder decoder = Base64.getDecoder();
+
+        byte[] decodedBytes = decoder.decode(secretKey);
+
+        return null;
+    }
+
+
+    @Override
     public Claims getClaims(String token) {
         if(token != null && !"".equals(token)){
             try{
@@ -56,10 +69,14 @@ public class JwtServiceImpl implements JwtService{
         return null;
     }
 
+
+
     @Override
     public boolean isValid(String token) {
         return this.getClaims(token) != null;
     }
+
+
 
     @Override
     public int getId(String token) {
