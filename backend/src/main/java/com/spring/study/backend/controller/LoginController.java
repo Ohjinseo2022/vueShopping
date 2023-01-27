@@ -77,7 +77,7 @@ public class LoginController {
     @CrossOrigin(origins = "http://localhost:3000/")
     public ResponseEntity findName(@CookieValue(value="token",required = false) String token){
         if(!jwtService.isValid(token)){
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);//401리턴
+            return new ResponseEntity<>(null,HttpStatus.OK); // 토큰 정보가 없어도 오류는 아님 !
         }
         Claims claims = jwtService.getClaims(token);
         int idx = Integer.parseInt(claims.get("idx").toString());

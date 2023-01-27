@@ -9,4 +9,5 @@ public interface NewUserRepository extends JpaRepository<NewUser,Integer> {
     NewUser findById(String id);
 
     NewUser findByIdx(int idx);
+
 }
